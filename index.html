@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>作品集展示</title>
+
+    <link rel="stylesheet" type="text/css" href="style.css">
+
+    <script src="libraries/p5.min.js"></script>
+    <script src="libraries/p5.sound.min.js"></script>
+  </head>
+
+  <body>
+    <!-- 水平選單 -->
+    <nav id="menu">
+      <ul>
+        <li><a href="#" onclick="hideIframe()">首頁</a></li>
+        <li><a href="#about">自我介紹</a></li>
+        <li class="dropdown">
+          <a href="#portfolio">作品集</a>
+          <ul class="dropdown-menu">
+            <li><a href="#" onclick="loadIframe('https://yao041021.github.io/20250221/')">第一周</a></li>
+            <li><a href="#" onclick="loadIframe('https://cfchengit.github.io/20250225/')">第二周</a></li>
+            <li><a href="#" onclick="loadIframe('https://yao041021.github.io/20250321-1/')">第三周</a></li>
+            <li><a href="#" onclick="loadIframe('https://yao041021.github.io/20250321-1/')">第四周</a></li>
+          </ul>
+        </li>
+        <li><a href="#quiz">測驗卷</a></li>
+        <li><a href="#videos">教學影片</a></li>
+      </ul>
+    </nav>
+
+    <!-- iframe 顯示區域 -->
+    <div class="iframe-container" id="iframe-container">
+      <iframe id="content-frame" src="" frameborder="0"></iframe>
+    </div>
+
+    <!-- p5.js 畫布 -->
+    <script src="sketch.js"></script>
+
+    <script>
+      // 隱藏 iframe
+      function hideIframe() {
+        const iframeContainer = document.getElementById('iframe-container');
+        iframeContainer.style.display = 'none';
+      }
+
+      // 動態載入 iframe 的內容並顯示
+      function loadIframe(url) {
+        const iframeContainer = document.getElementById('iframe-container');
+        const iframe = document.getElementById('content-frame');
+        iframe.src = url;
+        iframeContainer.style.display = 'block';
+      }
+
+      // 頁面載入時隱藏選單
+      window.onload = function () {
+        const menu = document.getElementById('menu');
+        menu.style.top = '-100px'; // 隱藏選單
+        hideIframe();
+      };
+
+      // 滑鼠移動時控制選單顯示與隱藏
+      window.onmousemove = function (event) {
+        const menu = document.getElementById('menu');
+        if (event.clientY < 250) {
+          menu.style.transition = 'top 0.5s';
+          menu.style.top = '0'; // 顯示選單
+        } else {
+          menu.style.transition = 'top 0.5s';
+          menu.style.top = '-100px'; // 隱藏選單
+        }
+      };
+    </script>
+  </body>
+</html>
